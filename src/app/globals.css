@@ -1,26 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alumni+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-bkl-50: oklch(97.71% 0.008 279.12);
+  --color-bkl-100: oklch(92.65% 0.032 269.73);
+  --color-bkl-200: oklch(84.19% 0.058 266.57);
+  --color-bkl-300: oklch(76.01% 0.085 262.99);
+  --color-bkl-400: oklch(67.93% 0.112 259.13);
+  --color-bkl-500: oklch(0.6023 0.2137 270.54); /* #4A65FF */
+  --color-bkl-600: oklch(55.81% 0.115 257.51);
+  --color-bkl-700: oklch(48.8% 0.102 257.53);
+  --color-bkl-800: oklch(41.77% 0.087 257.61);
+  --color-bkl-900: oklch(34.57% 0.072 257.9);
+
+  --color-ow: oklch(0.9702 0 0);
+
+  --font-sans: "Poppins", sans-serif, "Roboto";
+  --font-alumi: "Alumni Sans", sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.global-container {
+  padding: 50px 100px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
