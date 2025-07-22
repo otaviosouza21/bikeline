@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Alumni+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@100;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@706&family=League+Spartan:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
 @import "tailwindcss";
 
 @theme {
@@ -16,12 +20,15 @@
 
   --color-ow: oklch(0.9702 0 0);
 
-  --font-sans: "Poppins", sans-serif, "Roboto";
+  --font-poppins: "Poppins", sans-serif, "Roboto";
   --font-alumi: "Alumni Sans", sans-serif;
+  --font-league: "League Spartan", sans-serif;
+  --font-anton: "Anton", sans-serif;
+  --font-bebas: "Bebas Neue", sans-serif;
 }
 
 .global-container {
-  padding: 50px 100px;
+  padding: 50px 50px;
 }
 
 @layer utilities {

@@ -1,14 +1,11 @@
 import {
-    ArrowLeft,
   Bike,
-  CircleHelp,
   ShieldCheck,
   ThumbsUp,
-  User,
   Users,
   Zap,
 } from "lucide-react";
-import Image from "next/image";
+
 import AboutCard from "./AboutCard";
 
 export default function About() {
@@ -16,7 +13,7 @@ export default function About() {
     <section className="global-container">
       <div className="flex gap-2 mb-2 items-center group">
         <h2 className="text-2xl text-bkl-500 font-semibold">Quem Somos</h2>
-        <Bike className="text-bkl-700 group-hover:translate-x-2 transition-all"/>
+        <Bike className="text-bkl-700 group-hover:translate-x-2 transition-all" />
       </div>
       <div className="grid grid-cols-2 gap-10">
         <div className="flex flex-col gap-2">
