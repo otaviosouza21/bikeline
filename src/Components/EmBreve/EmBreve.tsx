@@ -1,6 +1,10 @@
 import Image from 'next/image';
-import BikelineLogo from '../../../public/id/sem-fundo/logo_semfundo-02.png'
+import BikelineLogo from '../../../public/images/logo_semfundo-02.png'
 import Link from 'next/link';
+import InstagramLogo from '@/../public/images/instagram (1).png'
+import FacebookLogo from '@/../public/images/facebook (1).png'
+import WhatsappLogo from '@/../public/images/whatsapp-2.svg'
+
 
 export default function EmBreve() {
     return (
@@ -10,7 +14,7 @@ export default function EmBreve() {
             <section className="relative flex items-center justify-center h-screen">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/70 to-primary/50" />
                 <div className="relative z-10 flex flex-col text-center px-2 max-w-xl mx-auto">
-                  <Image src={BikelineLogo} alt='bikeline-logo' />
+                    <Image src={BikelineLogo} alt='bikeline-logo' />
                     <h1 className="text-white -mt-10 text-xl md:text-5xl font-bold mb-4">
                         Estamos Chegando
                     </h1>
@@ -29,8 +33,8 @@ export default function EmBreve() {
                                 rel="noopener noreferrer"
                                 aria-label="Instagram"
                             >
-                                <img
-                                    src="/icons/instagram (1).png"
+                                <Image
+                                    src={InstagramLogo}
                                     alt="Instagram"
                                     className="h-6 w-6"
                                 />
@@ -42,8 +46,8 @@ export default function EmBreve() {
                                 rel="noopener noreferrer"
                                 aria-label="Facebook"
                             >
-                                <img
-                                    src="/icons/facebook (1).png"
+                                <Image
+                                    src={FacebookLogo}
                                     alt="Facebook"
                                     className="h-6 w-6"
                                 />
@@ -55,8 +59,8 @@ export default function EmBreve() {
                                 rel="noopener noreferrer"
                                 aria-label="WhatsApp"
                             >
-                                <img
-                                    src="/icons/whatsapp-2.svg"
+                                <Image
+                                    src={WhatsappLogo}
                                     alt="WhatsApp"
                                     className="h-6 w-6"
                                 />

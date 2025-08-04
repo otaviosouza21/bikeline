@@ -1,15 +1,17 @@
+// components/Form.tsx
 "use client";
+
 import Image from "next/image";
-import LogoBikeline3 from "../../../../public/id/sem-fundo/logo_semfundo-03.png";
 import InputText from "./InputText";
 import { Calendar, Mail, Phone, User } from "lucide-react";
-import { Dispatch, SetStateAction, useActionState, useEffect, useState } from "react";
-import { postLead } from "@/actions/lead/postLead";
+import { Dispatch, SetStateAction, useState } from "react";
+import { postLeadClient } from "@/lib/postLeadClient";
 import { toast } from "react-toastify";
+import LogoBikeline from '@/../public/images/logo_semfundo-03.png'
 
 type FormProps = {
-  setModal: Dispatch<SetStateAction<boolean>>
-}
+  setModal: Dispatch<SetStateAction<boolean>>;
+};
 
 export function Form({ setModal }: FormProps) {
   const [currentLead, setCurrentLead] = useState({
@@ -19,20 +21,25 @@ export function Form({ setModal }: FormProps) {
     dt_nascimento: "",
   });
 
-  const [state, formAction, isPending] = useActionState(postLead, {
-    errors: [],
-    msg_success: "",
-    success: false,
-  });
+  const [isPending, setIsPending] = useState(false);
 
-  useEffect(() => {
-    if (state?.errors?.length > 0) {
-      state.errors.forEach((erro: string) => toast.error(erro));
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsPending(true);
+
+ 
+
+    const result = await postLeadClient(currentLead);
+    setIsPending(false);
+
+    if (result.errors.length > 0) {
+      result.errors.forEach((erro: string) => toast.error(erro));
+      return;
     }
 
-    if (state?.success) {
-      toast.success(state.msg_success);
-      setModal((prev) => !prev)
+    if (result.success) {
+      toast.success(result.msg_success);
+      setModal((prev) => !prev);
       setCurrentLead({
         nome: "",
         email: "",
@@ -40,12 +47,10 @@ export function Form({ setModal }: FormProps) {
         dt_nascimento: "",
       });
     }
-  }, [state.success, state.errors, state.msg_success, setModal]);
-
-
+  };
 
   function formatPhone(value: string): string {
-    const digits = value.replace(/\D/g, "").slice(0, 11); // Remove tudo que não for número e limita a 11 dígitos
+    const digits = value.replace(/\D/g, "").slice(0, 11);
     if (digits.length <= 2) return `(${digits}`;
     if (digits.length <= 7)
       return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
@@ -53,16 +58,21 @@ export function Form({ setModal }: FormProps) {
   }
 
   return (
-    <form action={formAction} className="flex border-1 max-sm:rounded-none text-[#536FFD] bg-white  border-slate-200 shadow  flex-col justify-center gap-2  rounded-xl  py-4 px-6 ">
+    <form
+      onSubmit={handleSubmit}
+      className="flex border-1 max-sm:rounded-none text-[#536FFD] bg-white border-slate-200 shadow flex-col justify-center gap-2 rounded-xl py-4 px-6"
+    >
       <Image
         width={180}
+    
         alt="logo-bikeline"
         className="mx-auto -my-5 max-sm:-my-6"
-        src={LogoBikeline3}
+        src={LogoBikeline}
       />
       <h1 className="text-[#536FFD] font-bold text-1xl text-center">
         🎉 Preencha abaixo para receber seus 2 cupons exclusivos!
       </h1>
+
       <InputText
         label="Nome"
         name="nome"
@@ -78,7 +88,7 @@ export function Form({ setModal }: FormProps) {
       <InputText
         label="Email"
         name="email"
-        placeholder="seuemail@examplo.com"
+        placeholder="seuemail@exemplo.com"
         type="email"
         required
         icon={Mail}
@@ -90,7 +100,7 @@ export function Form({ setModal }: FormProps) {
       <InputText
         label="Telefone"
         name="telefone"
-        placeholder="(99) 1234-5678"
+        placeholder="(99) 12345-6789"
         type="text"
         required
         icon={Phone}
@@ -105,19 +115,26 @@ export function Form({ setModal }: FormProps) {
       <InputText
         label="Data de nascimento"
         name="dt_nascimento"
-        placeholder="Nome Completo"
+        placeholder="00/00/0000"
         required
         type="date"
         icon={Calendar}
         value={currentLead.dt_nascimento}
         onChange={(e) =>
-          setCurrentLead({ ...currentLead, dt_nascimento: e.target.value })
+          setCurrentLead({
+            ...currentLead,
+            dt_nascimento: e.target.value,
+          })
         }
       />
-      <button type="submit" className="py-2 mt-3 text-lg font-bold text-white transition-all shadow cursor-pointer hover:brightness-110 bg-bkl-500 hover:bg-bkl-500/90 rounded-xl">
-        {isPending ? '🎁 Buscando seu cupom...' : '🎁 Quero meus cupons!'}
+      <button
+        type="submit"
+        disabled={isPending}
+        className="py-2 mt-3 text-lg font-bold text-white transition-all shadow cursor-pointer hover:brightness-110 bg-bkl-500 hover:bg-bkl-500/90 rounded-xl"
+      >
+        {isPending ? "🎁 Buscando seu cupom..." : "🎁 Quero meus cupons!"}
       </button>
-      <span className="text-center">
+      <span className="text-center text-sm">
         *Cupons válidos apenas para produtos selecionados e por tempo limitado
       </span>
     </form>

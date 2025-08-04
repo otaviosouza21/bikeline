@@ -1,6 +1,6 @@
 'use client'
 import Image from "next/image";
-import LogoBikeline3 from '../../../public/id/sem-fundo/logo_semfundo-02.png'
+import LogoBikeline3 from '@/../public/images/logo_semfundo-02.png'
 import { useState } from "react";
 import Faq from "./Infos/Faq";
 import PrivacyPolicies from "./Infos/PrivacyPolicies";

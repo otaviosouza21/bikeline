@@ -1,5 +1,5 @@
 import Image from "next/image";
-import LogoBikeline3 from "../../../public/id/sem-fundo/logo_semfundo-03.png";
+import LogoBikeline3 from "@/../public/images/logo_semfundo-03.png";
 
 export default function Header() {
   return (
